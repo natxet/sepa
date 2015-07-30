@@ -3,40 +3,52 @@ SEPA "Cuadernos" implementation in PHP
 
 Some variable names are in Spanish because the official documentation is in Spanish too.
 
-Input is expected to be an object, like the one consisting in a json_encode of:
+## Installation:
 
+Install via composer
 
-	{
-		"ordenante": {
-			"nif_ordenante": "B99999999",
-			"sufijo_ordenante": "001",
-			"fecha_creacion": "2015-06-09",
-			"fecha_ejecucion": "2015-06-12",
-			"iban_ordenante": "ES9999999999999999999999",
-			"detalle_cargo": true,
-			"nombre_ordenante": "EMPRESA QUE PAGA S.L.",
-			"direccion_via_y_numero": "PLAÇA SAGRADA FAMÍLIA #1",
-			"direccion_cp_y_poblacion": "08025 BARCELONA",
-			"direccion_provincia": "BARCELONA",
-			"pais_ordenante": "ES"
-		},
-		"beneficiarios": [
-		   {
-				"referencia_ordenante": "DRE0002",
-				"iban_beneficiario": "ES8888888888888888888888",
-				"importe_transferencia" : 13.77,
-				"clave_gastos": 3,
-				"bic_beneficiario": "CAIXESBBXXX",
-				"nombre_beneficiario": "Empresa Que Cobra, SL ",
-				"direccion_via_y_numero": "Valencia 990, 3º1ª A",
-				"direccion_cp_y_poblacion": "08001 Barcelona",
-				"direccion_provincia": "Barcelona",
-				"pais_beneficiario": "ES",
-				"concepto": "Pago de la factura adeudada del mes de mayo con numero 15-345",
-				"tipo_transferencia": "SUPP",
-				"proposito_transferencia": "SUPP"
-		   }
-		]
-	}
+	composer require "natxet/sepa"
 
+## Usage:
 
+	<?php
+	
+	use Natxet\SEPA\SEPA;
+	
+	$json = <<< JSON
+		{
+			"ordenante": {
+				"nif_ordenante": "B99999999",
+				"sufijo_ordenante": "001",
+				"fecha_creacion": "2015-06-09",
+				"fecha_ejecucion": "2015-06-12",
+				"iban_ordenante": "ES9999999999999999999999",
+				"detalle_cargo": true,
+				"nombre_ordenante": "EMPRESA QUE PAGA S.L.",
+				"direccion_via_y_numero": "PLAÇA SAGRADA FAMÍLIA #1",
+				"direccion_cp_y_poblacion": "08025 BARCELONA",
+				"direccion_provincia": "BARCELONA",
+				"pais_ordenante": "ES"
+			},
+			"beneficiarios": [
+			   {
+					"referencia_ordenante": "DRE0002",
+					"iban_beneficiario": "ES8888888888888888888888",
+					"importe_transferencia" : 13.77,
+					"clave_gastos": 3,
+					"bic_beneficiario": "CAIXESBBXXX",
+					"nombre_beneficiario": "Empresa Que Cobra, SL ",
+					"direccion_via_y_numero": "Valencia 990, 3º1ª A",
+					"direccion_cp_y_poblacion": "08001 Barcelona",
+					"direccion_provincia": "Barcelona",
+					"pais_beneficiario": "ES",
+					"concepto": "Pago de la factura adeudada del mes de mayo con numero 15-345",
+					"tipo_transferencia": "SUPP",
+					"proposito_transferencia": "SUPP"
+			   }
+			]
+		}
+	JSON;
+	
+	$sepa = new SEPA( json_decode( $json ) );
+	file_put_contents('destination.txt', $sepa->output());

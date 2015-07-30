@@ -1,6 +1,29 @@
 {
+  "name": "natxet/sepa",
+  "description": "Generating SEPA Cuadernos standard files for wire transfers in Spain",
+  "type": "library",
+  "keywords": [
+    "SEPA",
+    "Cuadernos"
+  ],
+  "homepage": "https://github.com/natxet/sepa",
+  "license": "Apache License",
+  "authors": [
+    {
+      "name": "Natxet",
+      "email": "icofre@gmail.com",
+      "homepage": "https://github.com/natxet"
+    }
+  ],
   "require": {
-    "symfony/console": "2.3.*@dev"
+    "php": ">=5.0"
   },
-  "minimum-stability": "dev"
+  "autoload": {
+    "classmap": ["src/"]
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1"
+    }
+  }
 }

@@ -157,6 +157,12 @@ class SEPA
         $this->total_transferencias_importe += $importe_transferencia;
         $this->total_transferencias_registros++;
 
+        $tipo_transferencia = $this->getObjectData( $b, 'tipo_transferencia', false );
+        if(!$tipo_transferencia) $tipo_transferencia = 'SUPP';
+
+        $proposito_transferencia = $this->getObjectData( $b, 'proposito_transferencia', false );
+        if(!$proposito_transferencia) $proposito_transferencia = 'SUPP';
+
         $this->addField( 3, 2 ); // codigo_registro
         $this->addField( 'SCT', 3, self::TYPE_ALPHANUMERIC ); // codigo_operacion
         $this->addField( self::VERSION_CUADERNO, 5 ); // versión cuaderno
@@ -174,8 +180,8 @@ class SEPA
         $this->addField( $this->getObjectData( $b, 'pais_beneficiario' ), 2, self::TYPE_ALPHANUMERIC );
         $this->addField( $this->getObjectData( $b, 'concepto' ), 140, self::TYPE_ALPHANUMERIC );
         $this->addField( '', 35, self::TYPE_ALPHANUMERIC ); // identificacion_instruccion. leave blank!
-        $this->addField( $this->getObjectData( $b, 'tipo_transferencia' ), 4, self::TYPE_ALPHANUMERIC );
-        $this->addField( $this->getObjectData( $b, 'proposito_transferencia' ), 4, self::TYPE_ALPHANUMERIC );
+        $this->addField( $tipo_transferencia, 4, self::TYPE_ALPHANUMERIC );
+        $this->addField( $proposito_transferencia, 4, self::TYPE_ALPHANUMERIC );
         $this->addField( '', 99, self::TYPE_ALPHANUMERIC ); // libre. leave blank!
 
         $this->addLine();

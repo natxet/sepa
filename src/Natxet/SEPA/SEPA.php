@@ -63,7 +63,13 @@ class SEPA
         }
         $this->addTotalTransferencia();
         $this->addTotalGeneral();
-        return $this->file;
+
+        return $this->encodeToIso( $this->file );
+    }
+
+    public function encodeToIso( $string )
+    {
+        return mb_convert_encoding( $string, 'ISO-8859-1', 'UTF-8', true );
     }
 
     /**

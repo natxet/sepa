@@ -236,6 +236,11 @@ class SEPA
 
     protected function addField( $value, $size, $type = self::TYPE_NUMERIC )
     {
+        if (mb_strlen( $value ) > $size) {
+            $this->file .= substr( $value, 0, $size );
+            return;
+        }
+
         if (self::TYPE_NUMERIC === $type) {
             $this->file .= str_pad( $value, $size, '0', STR_PAD_LEFT );
         } else {

@@ -254,24 +254,25 @@ class SEPA
         }
     }
 
+
     /**
      * @param string $date ISO date YYYY-MM-DD
      *
-     * @return int
+     * @return string date YYYYMMDD
      */
     protected function formatDate( $date )
     {
-        return (int) str_replace( '-', '', $date );
+        return str_replace( '-', '', $date );
     }
 
     /**
      * @param float $amount the amount to convert f.i. '14.52' OR '14.1' OR '14'
      *
-     * @return int
+     * @return string 1452 (multiplied by 100)
      */
     protected function formatCurrency( $amount )
     {
-        return (int) ( $amount * 100 );
+        return (string) $amount * 100;
     }
 
     protected function clean_string( $string )

@@ -69,7 +69,7 @@ class SEPA
 
     public function encodeToIso( $string )
     {
-        return mb_convert_encoding( $string, 'ISO-8859-1', 'UTF-8', true );
+        return mb_convert_encoding( $string, 'ISO-8859-1', 'UTF-8' );
     }
 
     /**
